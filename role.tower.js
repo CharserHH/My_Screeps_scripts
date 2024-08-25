@@ -3,15 +3,14 @@
  */
 var roleTower = {
     run: function (tower) {
-        // 获取范围内血量最低的敌人
-        var closestHostile = tower.pos.findInRange(FIND_HOSTILE_CREEPS).sort((a, b) => a.hits - b.hits)[0];
+        // 获取范围内的敌人
+        var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
         if (closestHostile) {
             tower.attack(closestHostile);
         } else if (tower.store[RESOURCE_ENERGY] > tower.store.getCapacity(RESOURCE_ENERGY) * 0.5) {
             // 获取受损的建筑
             var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
-                filter: (structure) => (structure.structureType == STRUCTURE_RAMPART && structure.hits < structure.hitsMax * 0.02) ||
-                    (structure.hits < structure.hitsMax * 0.5 && structure.structureType != STRUCTURE_WALL)
+                filter: (structure) => (structure.hits < structure.hitsMax * 0.5 && structure.structureType != STRUCTURE_WALL && structure.structureType != STRUCTURE_RAMPART)
             });
             if (closestDamagedStructure) {
                 tower.repair(closestDamagedStructure);

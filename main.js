@@ -73,7 +73,7 @@ module.exports.loop = function () {
     }
 
     // 生成builder
-    if (harvesterList.length > Memory.minHarvester && builderList.length < 2 && CreepTools.getConstructionSitesCount() > 0) {
+    if (harvesterList.length > Memory.minHarvester && builderList.length < 2) {
         var newName = 'builder' + Game.time.toString();
         if(Game.spawns['Spawn1'].spawnCreep([WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE], newName, {
             memory: {

@@ -79,11 +79,14 @@ var roleBuilder = {// 重构后的roleBuilder 细化了状态机
                 }
                 break;
             case 'break':
-                // 休息时去执行upgrader的工作
-                var target = creep.room.controller;
-                if(creep.upgradeController(target) == ERR_NOT_IN_RANGE){
-                    creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
-                    
+                // 休息时去修墙
+                var targetRam = creep.getLowestRampart();
+                if (creep.repair(targetRam) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(targetRam, {
+                        visualizePathStyle: {
+                            stroke: '#ffffff'
+                        }
+                    });
                 }
                 // // 若身上还有能量 则存入最近的空余Container
                 // if (creep.store[RESOURCE_ENERGY] > 0) {

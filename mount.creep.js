@@ -57,14 +57,14 @@ const creepExtension = {
             filter: (s) => s.hits < 20000 && s.structureType == STRUCTURE_RAMPART
         }).sort((a, b) => a.hits - b.hits)[0]
     },
-    // 获取所有container并按照能量数量排序
+    // 获取距离自身最近的有能量的container Upgrader Reapirer Builder使用
     getContainersByEnergy: function () {
         return this.pos.findClosestByPath(FIND_STRUCTURES, {
             filter: (s) => (s.structureType == STRUCTURE_CONTAINER) &&
                 s.store[RESOURCE_ENERGY] > 0
         })
     },
-    // 获取距离自身最近的有空余的container
+    // 获取距离自身最近的有空余的container或storage Harvesters使用
     getNearestContainer: function () {
         return this.pos.findClosestByPath(FIND_STRUCTURES, {
             filter: (s) => (s.structureType == STRUCTURE_CONTAINER || s.structureType == STRUCTURE_STORAGE) &&
